@@ -1,0 +1,1202 @@
+Per ciascun requisito, viene identificato un caso di test in cui il requisito è rispettato ed uno in cui non è rispettato, indicando i rispettivi input e output. In base ai risultati ottenuti, il requisito è considerato "SODDISFATTO", "PARZIALMENTE SODDISFATTO" oppure "NON SODDISFATTO".
+
+########################################
+# Casi di test grammaticali
+########################################
+
+#### 001 - REQUISITO SODDISFATTO
+Il programma è composto esclusivamente di funzioni.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def printMessage(void)
+	puts "hello world 2";
+	return 0;
+end
+
+def main()
+	puts "hello world 1";
+	return printMessage(nil);
+end
+
+
+OUTPUT:
+hello world 1
+hello world 2
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+n = 10;
+
+def main()
+	puts "hello world 1";
+end
+
+OUTPUT:
+==> Parsing error: unexpected token IDENTIFIER(n) at line 1
+
+
+
+#### 002 - REQUISITO SODDISFATTO
+Ogni funzione inizia con un "def" e si conclude con un "end".
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts "ok!";
+end
+
+OUTPUT:
+ok!
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts "ok!";
+
+
+OUTPUT:
+==> Parsing error: unexpected end of tokens.
+
+
+
+
+#### 003 - REQUISITO SODDISFATTO
+Ogni funzione deve essere dichiarata con una lista di zero o più parametri. 
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunction (a,b,c,d,e)
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunction
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(PUTS) at line 2
+
+
+
+
+#### 004 - REQUISITO SODDISFATTO
+I parametri nella dichiarazione di una funzione possono essere esclusivamente identificatori.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunction (caio, sempronio)
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunction (4, "sempronio")
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+==> Parsing error: unexpected token NUMBER(4) at line 1
+
+
+
+
+
+#### 005 - REQUISITO SODDISFATTO
+Tutti gli identificatori che compongono i parametri di una funzione devono essere diversi.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunction (a,b)
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunction (a,a)
+	puts "hello world";
+end
+
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+==> Parsing error: parameters names of function myFunction must be different.
+
+
+
+#### 006 - REQUISITO SODDISFATTO
+Il corpo di una funzione deve contenere almeno un comando
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts "ciao";
+end
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(END) at line 2
+
+
+
+
+
+#### 007 - REQUISITO SODDISFATTO
+Non sono ammesse espressioni isolate: tutte le espressioni, comprese le chiamate di funzione, devono essere incluse all'interno di un comando.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	 n = 1 + 3;
+	 puts n;
+end
+
+OUTPUT:
+4
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	5 + 6;
+	n = 1 + 3;
+	puts n;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token NUMBER(5) at line 2
+
+
+
+
+
+#### 008 - REQUISITO SODDISFATTO
+Un comando non può essere incluso in una espressione. Notare che, in accordo con la grammatica scelta, puts e gets sono comandi e NON sono funzioni interne.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	a = 0;
+	n = a + 1 + 3;
+	puts n;
+end
+
+OUTPUT:
+4
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	a = 1;
+	n = (puts 0) + 1 + 3;
+	puts n;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(PUTS) at line 3
+
+
+
+#### 009 - REQUISITO SODDISFATTO
+Un assegnamento richiede un identificatore, un simbolo di uguaglianza e una espressione, seguiti da un "punto e virgola". Ogni altra combinazione di costrutti in un assegnamento è una violazione della grammatica.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	a = "hello world";
+	puts a;
+end
+
+OUTPUT:
+hello world
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	a = "hello world"
+	puts a;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(PUTS) at line 3
+
+
+
+
+#### 010 - REQUISITO RISPETTATO
+Un return richiede una espressione seguita da un "punto e virgola". Ogni altra combinazione di costrutti in un return è una violazione della grammatica.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	return 1+2;
+end
+
+OUTPUT:
+< vuoto >
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	return 5 1
+end
+
+OUTPUT:
+==> Parsing error: unexpected token NUMBER(1) at line 2
+
+
+
+#### 011 - REQUISITO RISPETTATO
+L'istruzione condizionale inizia con un "if" e si conclude con un "end", richiede una espressione booleana, una lista non vuota di comandi da eseguire se l'espressione ha valore "true" e una da eseguire se l'espressione ha valore "false". Ogni altra combinazione di costrutti in una espressione condizionale è una violazione della grammatica.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	a = true;
+	if a
+		return "ok";
+	else
+		return "ko";
+	end
+end
+
+OUTPUT:
+< vuoto >
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	a = true;
+	if a
+		return "ok";
+
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(END) at line 6
+
+
+#### 012 - REQUISITO RISPETTATO
+La definizione di un ciclo inizia con un "while" e si conclude con un "end", richiede una espressione booleana e un insieme non vuoto di comandi da eseguire finché l'espressione ha valore "true". Ogni altra combinazione di costrutti in un ciclo è una violazione della grammatica.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	a = true;
+	while a
+		puts "ciao";
+		a = false;
+	end
+	return 0;
+end
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	a = true;
+	while a
+		puts "ciao";
+		a = false;
+	return 0;
+end
+
+OUTPUT:
+==> Parsing error: unexpected end of tokens.
+
+
+
+
+
+
+#### 013 - REQUISITO SODDISFATTO
+Il comando puts richiede una espressione seguita da un "punto e virgola". Ogni altra combinazione di costrutti in un puts è una violazione della grammatica.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts 1+2;
+end
+
+OUTPUT:
+3
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts gets n;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token KEYWORD(GETS) at line 2
+
+
+
+
+#### 014 - REQUISITO SODDISFATTO
+Il comando gets esegue un assegnamento e richiede un identificatore, seguita da un "punto e virgola". Ogni altra combinazione di costrutti in un gets è una violazione della grammatica. Il comando gets distingue correttamente tra numeri interi (con o senza segno) e stringhe. Numeri troppo grandi o troppo piccoli (cioè che non sono rappresentabili con un int) sono trattati come stringhe. Non è richiesto che l'idenficatore associato ad un gets sia stato utilizzato precedentemente. La spazio è considerato un separatore di stringhe.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	gets n;
+	if is_str(n)
+		puts n;
+	else
+		puts to_str(n);
+	end
+end
+
+OUTPUT:
+< input dell'utente: > hello world
+hello
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	gets 4+5;
+	if is_str(n)
+		puts n;
+	else
+		puts to_str(n);
+	end
+end
+
+OUTPUT:
+==> Parsing error: unexpected token NUMBER(4) at line 2
+
+
+
+
+
+#### 015 - REQUISITO RISPETTATO
+Un'espressione può essere composta da un singolo Literal, da un identificatore, da una chiamata di funzione o da una loro combinazione tramite uno o più operatori booleani. Le operazioni sono eseguite da sinistra verso destra (associatività a sinistra). Non esiste una priorità tra gli operatori. L'ordine di esecuzione può essere cambiato tramite l'uso di parentesi, le quali indicano esplicitamente come associare le operazioni. I Number possono avere un valore negativo, ma nel codice sorgente possono essere scritti soltanto numeri senza segno.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts 0 - 16 + (2 * 3) / 5;
+	puts "hello " + "world";
+	puts nil;
+end
+
+OUTPUT:
+-2
+hello world
+nil
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts "hello "  "world";
+	puts 5 7;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token STRING(world) at line 2
+
+
+
+
+
+#### 016 - REQUISITO RISPETTATO
+Ogni operatore binario può essere applicato soltanto tra espressioni dello stesso tipo, fatta eccezione per operandi Nil, che possono essere combinati con altri Literal o Nil, purché gli operatori usati siano compatibili con i Literal usati. Operazioni aritmetiche tra Number restituiscono Number, operazioni di confronto tra Literal dello stesso tipo restituiscono Bool, operazioni di concatenazione tra String restituiscono String. Qualunque operazione che coinvolge uno o più Nil restituisce un Nil.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts "hello " + "world";
+	puts 5 % 7;
+	puts 3 - nil;
+	puts nil + "3";
+	puts true and nil;
+	puts nil >= nil;
+end
+
+OUTPUT:
+hello world
+5
+nil
+nil
+nil
+nil
+
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts "hello " + "world" + nil;
+	puts 5 % "hello";
+end
+
+OUTPUT:
+==> Semantic error: On function main: different variable types applied to the same operator
+    near to: (BinOp: (Number 5) % (String hello))
+
+
+
+
+########################################
+# Casi di test sintattici
+########################################
+
+#### 017 - REQUISITO RISPETTATO
+Il codice sorgente viene completamente descritto come una foresta di alberi binari, ciascuno dei quali è associato ad una funzione (non è previsto l'uso di alberi generici). Ogni nodo rappresenta un costrutto del linguaggio.
+
+A) Caso di test con requisito rispettato
+
+INPUT:
+E' stata usata l'opzione --printT per visualizzare la foresta di alberi sintattici relativa al programma "test_completo" (vedi file).
+
+OUTPUT:
+L'output è completo, corretto e dettagliato. 
+
+
+########################################
+# Casi di test semantici
+########################################
+
+#### 018 - REQUISITO RISPETTATO
+Prima dell'esecuzione, viene verificata la validità delle chiamate di funzione, che devono riferirsi a funzioni dichiarate nel codice o a funzioni interne. Le funzioni possono essere scritte in un qualunque ordine: non è necessario che nel codice sorgente la dichiarazione di una funzione preceda la sua invocazione.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	return printMessage("hello world");
+end
+
+def printMessage(msg)
+	if is_str(msg)
+		puts msg;
+	else
+		puts "error";
+	end
+	return 0;
+end
+
+OUTPUT:
+hello world
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	return printMessage("hello world");
+end
+
+def printMsg(msg)
+	if is_str(msg)
+		puts msg;
+	else
+		puts "error";
+	end
+	return 0;
+end
+
+OUTPUT:
+==> Execution error: unknown function
+    near to: printMessage ((String hello world))
+
+
+#### 018B - REQUISITO RISPETTATO
+Non è possibile richiamare una funzione con un numero di parametri nullo o diverso da quello con cui è stata definita.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunc(a,b,c)
+	puts "ciao";
+	return 0;
+end
+
+def main()
+	n = myFunc(1,2,3);
+end
+
+
+OUTPUT:
+ciao
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	return printMessage();
+end
+
+def printMessage(msg)
+	if is_str(msg)
+		puts msg;
+	else
+		puts "error";
+	end
+	return 0;
+end
+
+OUTPUT:
+==> Parsing error: unexpected token SYMBOL()) at line 2
+
+
+#### 019 - REQUISITO SODDISFATTO
+Prima dell'esecuzione, viene verificato che le funzioni interne non siano state implementate nel programma.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts length("hello");
+end
+
+
+OUTPUT:
+5
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def length(str)
+	return 0;
+end
+
+def is_str(str)
+	return 0;
+end
+
+def to_str(num)
+	return "";
+end
+
+def main()
+	puts length("hello");
+	puts is_str("hello");
+	puts to_str(1000);
+end
+
+OUTPUT:
+==> Semantic error: On function length: cannot redeclare built-in functions
+
+
+
+#### 020 - REQUISITO SODDISFATTO
+Prima dell'esecuzione, viene verificato che non siano applicati operatori binari tra letterali il cui tipo sia sicuramente diverso e determinabile a prescindere dall'esecuzione.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts 3 + 4;
+end
+
+OUTPUT:
+7
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts 3 + "pippo";
+end
+
+OUTPUT:
+==> Semantic error: On function main: different variable types applied to the same operator
+    near to: (BinOp: (Number 3) + (String pippo))
+
+
+
+#### 021 - REQUISITO SODDISFATTO
+Prima dell'esecuzione, viene verificato che ogni identificatore, prima di essere usato in un'espressione, sia stato precedentemente assegnato (anche tramite gets).
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	n = "hello world";
+	puts n;
+end
+
+
+OUTPUT:
+hello world
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts n;
+end
+
+OUTPUT:
+==> Semantic error: On function main: identifier not assigned
+    near to: (Identifier n)
+
+
+
+
+#### 022 - REQUISITO SODDISFATTO
+Non è possibile avere più funzioni associate al medesimo identificatore, ovvero più funzioni con lo stesso nome, indipendentemente dal numero di parametri con cui sono dichiarate.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunc()
+	return 0;
+end
+
+def main()
+	return 0;
+end
+
+OUTPUT:
+< vuoto >
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunct(a)
+	return 0;
+end
+
+def myFunct(a,b)
+	return 0;
+end
+
+def main()
+	return 0;
+end
+
+OUTPUT:
+==> Semantic error: On function myFunct: function already declared
+
+
+
+
+########################################
+# Casi di test relativi all'esecuzione
+########################################
+
+#### 023 - REQUISITO SODDISFATTO
+Non sono ammessi memory leak: ogni oggetto allocato deve essere deallocato nel momento in cui non è più necessario, fermo restando che gli alberi binari sintattici non devono essere toccati.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+# Stressing program...
+def prova(void)
+	if "ciao" < "prova"
+		var1 = 100;
+		return true;
+	else
+		var2 = 200;
+	end
+	return nil;	
+end
+
+def main()
+	n = 1;
+	while true and prova(1)	
+		n = false and ("pippo" <= "pluto") and nil;
+		n = 1;		
+		n = n + 1;
+		puts "n vale: " + to_str(n);
+	end
+end
+
+
+OUTPUT:
+In questo caso, più che l'output su stout, è stata controllata la memoria utilizzata dall'interprete per eseguire il codice: non è stata rilevata alcuna variazione della memoria inizialmente allocata (nell'ordine di poche centinaia di kilobyte), dimostrando così l'assenza di memory leak su questo programma particolarmente stressante, studiato appositamente per allocare continuamente nuovi oggetti.
+
+B) Non è possibile non rispettare questo requisito - OK
+
+#### 023 - REQUISITO SODDISFATTO
+Ogni funzione ha una tabella dell'ambiente attivo, con le associazioni tra identificatori e variabili, indipendente dalla tabella dell'ambiente delle altre funzioni. 
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunc(void)
+	n = 10;
+	puts "La variabile n, dentro myFunct(), vale: " + to_str(n);
+	return nil;
+end
+
+def main()
+	n = 5;
+	ret = myFunc(nil);
+	puts "La variabile n, dentro main(), vale: " + to_str(n);
+end
+
+
+OUTPUT:
+La variabile n, dentro myFunct(), vale: 10
+La variabile n, dentro main(), vale: 5
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunc(void)
+	n = 10;
+	puts "La variabile n, dentro myFunct(), vale: " + to_str(n);
+	return nil;
+end
+
+def main()
+	ret = myFunc(nil);
+	puts "La variabile n, dentro main(), vale: " + to_str(n);
+end
+
+OUTPUT:
+La variabile n, dentro myFunct(), vale: 10
+==> Execution error: unknown identifier
+    near to: (Identifier n)
+
+
+
+#### 024 - REQUISITO SODDISFATTO
+All'interno di una funzione, tutti gli identificatori assegnati sono visibili con il medesimo scope, ovvero tutti gli identificatori continuano a esistere finché la funzione non termina.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	flag = true;
+	while flag
+		varInt = "Questa e` una variabile dichiarata dentro un ciclo WHILE";
+		flag = false;
+	end
+	puts varInt + " e utilizzata in un altro punto della funzione";
+end
+
+
+OUTPUT:
+Questa e` una variabile dichiarata dentro un ciclo WHILE e utilizzata in un altro punto della funzione
+
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	flag = true;
+	varEst = true;
+	while flag
+		varEst = "Questa e` una variabile dichiarata dentro un ciclo WHILE";
+		flag = false;
+	end
+	if varEst
+		puts "Sto sbagliando... perché l'assegnamento dentro il ciclo while ha visibilità in tutta la funzione";
+	else
+		puts "Sto sbagliando... ";
+	end
+end
+
+
+OUTPUT:
+==> Execution error: unknown condition expression type
+    near to: (String Questa e` una variabile dichiarata dentro un ciclo WHILE)
+
+
+#### 025 - REQUISITO SODDISFATTO
+Ogni funzione deve sempre restituire un valore: in assenza di un esplicito return, viene restituito un nil.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def myFunction(n)
+	n = 10;
+end
+
+def main()
+	puts myFunction(5);
+end
+
+OUTPUT:
+nil
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def myFunction(void)
+	return 10;
+end
+
+def main()
+	puts "Faccio finta che myFunction non restituisca alcuna valore";
+	n = false;
+	res = true;
+	res = myFunction(nil);
+	puts n and res;
+end
+
+OUTPUT:
+==> Execution error: operand type or operator type mismatch
+    near to: (BinOp: (Identifier n) and (Identifier res))
+
+
+
+#### 026 - REQUISITO SODDISFATTO
+Il passaggio di parametri ad una funzione è sempre per copia.
+
+A) Caso di test con requisito rispettato
+
+INPUT:
+def myFunction(n)
+	n = 1;
+	return 0;
+end
+
+def main()
+	n = 5;
+	x = myFunction(n); # Passaggio per copia
+	puts n;
+end
+
+OUTPUT:
+5
+
+
+B) Caso di test con requisito non rispettato - OK
+
+Non è possibile non rispettare questo requisito: se non fosse rispettato (cioè se i parametri fossero passati per riferimento), allora l'output del programma precedente sarebbe 1.
+
+
+#### 027 - REQUISITO SODDISFATTO
+I parametri con cui viene dichiarata la funzione main() sono irrilevanti: main() è l'unica funzione richiamata automaticamente e che non ha bisogno di parametri. Tutte le altre funzioni richiedono almeno un parametro.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main(a,b)
+	n = 5;
+	puts n;
+	return 0;
+end
+
+OUTPUT:
+5
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	n = 5;
+	puts n;
+	return 0;
+end
+
+# Faccio come in Ruby, cioè richiamo main() esplicitamente
+main()
+
+
+OUTPUT:
+==> Parsing error: unexpected token IDENTIFIER(main) at line 8
+
+
+
+#### 028 - REQUISITO SODDISFATTO
+L'interprete riconosce la funzione interna length(param), che data una stringa ne restituisce il numero di caratteri.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts length("12345");
+end
+
+
+OUTPUT:
+5
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts length("12345", "hello");
+end
+
+OUTPUT:
+==> Semantic error: On function main: function require 1 param(s) but 2 param(s) are given
+    near to: length ((String 12345) (String hello))
+
+
+
+#### 029 - REQUISITO RISPETTATO
+L'interprete riconosce la funzione interna to_str(param), che data un numero ne restituisce la rappresentazione come stringa.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def main()
+	puts to_str(555);
+end
+
+OUTPUT:
+555
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def main()
+	puts to_str("hello");
+end
+
+OUTPUT:
+==> Execution error: to_str() parameter 1 type mismatch
+    near to: (String hello)
+
+
+
+#### 030 - REQUISITO SODDISFATTO
+L'interprete riconosce la funzione interna is_str(param), che dato un letterale restituisce true se è una stringa, false altrimenti.
+
+A) Caso di test con requisito rispettato
+
+INPUT:
+def main()
+	puts is_str("hello");
+end
+
+OUTPUT:
+true
+
+
+B) Caso di test con requisito non rispettato
+
+INPUT:
+def main()
+	puts is_str("hello", "world");
+end
+
+OUTPUT:
+==> Semantic error: On function main: function require 1 param(s) but 2 param(s) are given
+    near to: is_str ((String hello) (String world))
+
+
+#### 031 - REQUISITO RISPETTATO
+Non sono ammesse funzioni ricorsive.
+
+A) Caso di test con requisito rispettato - OK
+
+INPUT:
+def f1(void)
+	return f2(nil);
+end
+
+def f2(void)
+	return 5;
+end
+
+def main()
+	puts f1(0);
+end
+
+OUTPUT:
+5
+
+
+B) Caso di test con requisito non rispettato - OK
+
+INPUT:
+def ricorsiva(n)
+	while n<10
+		n = ricorsiva(n);
+		puts n;
+	end
+	return n;
+end
+
+
+def main()
+	n = 1;
+	x = ricorsiva(n);
+	puts x;
+end
+
+
+
+OUTPUT:
+==> Execution error: function recursion is not supported yet.
+
+
+
+########################################
+# Casi di test relativi all'interprete
+########################################
+
+#### 031 - REQUISITO SODDISFATTO
+L'interprete, che prende in input il codice del programma da interpretare leggendolo da file, può essere invocato da riga di comando con la sintassi: RmmInterpreter [OPTION...] [FILE]. Ci sono opzioni che permettono di avere informazioni sull'utilizzo dell'interprete, sul copyright e sulla versione. Sono anche previste due opzioni di debug: la prima permette di visionare la struttura degli alberi sintattici tramite un output colorato, la seconda permette di ottenere informazioni dettagliate sia sull'analisi sintattica, sia sull'analisi semantica e sull'esecuzione.
+
+Casi di test con requisito rispettato - Esempi di uso
+
+$ ./RmmInterpreter 
+Usage:
+  RmmInterpreter [OPTION...] [FILE] - A interpreter for Rubymm language
+
+Help Options:
+  -?, --help        Show help options
+
+Application Options:
+      --printT      Print the tree structure (with colored output)
+      --absDebug    Allow debug messages
+  -c, --copyright   Show copyright info
+  -v, --version     Show version and exit
+
+$ ./RmmInterpreter -c
+RmmInterpreter - Copyright (C) 2009 Francesco Galgani, Napolitano Daniele
+RmmInterpreter is free software licensed with GPLv3
+
+$ ./RmmInterpreter -v
+RmmInterpreter 1.0
+
+
+
+
+#### 032 - REQUISITO SODDISFATTO
+Il return della funzione main() corrisponde al return dell'interprete. Se il main() non ha un return, l'interprete, in assenza di errori, restituisce zero.
+
+INPUT:
+def main()
+	return 5;
+end
+
+Eseguo:
+#!/bin/bash
+./RmmInterpreter test.rbmm
+echo rv: $?
+
+OUTPUT:
+rv: 5
+
+
+
+
+########################################
+# Test finale con un programma completo
+########################################
+
+#### TEST FINALE COMPLETATO CON SUCCESSO
+Esecuzione di un programma completo che coinvolge tutti i costrutti definiti in RMM e loro combinazioni. Il file "test_completo" si trova nella cartella "examples".
+
+OUTPUT:
+
+--- NUMERI PRIMI ---
+Stabilisce se un numero e' primo. Inserisci un numero positivo (max 6 cifre): 
+hello
+Attenzione: hello non e` un numero valido
+Inserisci un numero: 
+123456789
+Attenzione: 123456789 non e` un numero positivo di max 6 cifre
+Inserisci un numero: 
+153211
+La radice quadrata di 153211 e` 391
+Controllo gli eventuali divisori da 3 fino a 391
+349 e` divisore di 153211
+Il numero inserito non e` primo
+
+
+

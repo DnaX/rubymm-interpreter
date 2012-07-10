@@ -10,3 +10,8 @@
 *.lai
 *.la
 *.a
+
+# Code::Blocks files and built files directory
+*.depend
+*.layout
+obj/

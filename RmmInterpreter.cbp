@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="RmmInterpreter" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/RmmInterpreter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-O" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="src/tokenizer" />
+			<Add directory="src" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="src/tokenizer" />
+			<Add directory="src" />
+		</ResourceCompiler>
+		<Linker>
+			<Add directory="src/parser" />
+			<Add directory="src" />
+		</Linker>
+		<Unit filename="src/AssignmentTree.cpp" />
+		<Unit filename="src/AssignmentTree.h" />
+		<Unit filename="src/BinaryOperatorTree.cpp" />
+		<Unit filename="src/BinaryOperatorTree.h" />
+		<Unit filename="src/BlockTree.cpp" />
+		<Unit filename="src/BlockTree.h" />
+		<Unit filename="src/BoolTree.cpp" />
+		<Unit filename="src/BoolTree.h" />
+		<Unit filename="src/Checker.cpp" />
+		<Unit filename="src/Checker.h" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/Command.h" />
+		<Unit filename="src/DoubleCmdTree.cpp" />
+		<Unit filename="src/DoubleCmdTree.h" />
+		<Unit filename="src/Environment.cpp" />
+		<Unit filename="src/Environment.h" />
+		<Unit filename="src/Execute.cpp" />
+		<Unit filename="src/Execute.h" />
+		<Unit filename="src/ExpressionTree.cpp" />
+		<Unit filename="src/ExpressionTree.h" />
+		<Unit filename="src/FunctionCallTree.cpp" />
+		<Unit filename="src/FunctionCallTree.h" />
+		<Unit filename="src/FunctionTree.cpp" />
+		<Unit filename="src/FunctionTree.h" />
+		<Unit filename="src/GetsTree.cpp" />
+		<Unit filename="src/GetsTree.h" />
+		<Unit filename="src/IdentifierTree.cpp" />
+		<Unit filename="src/IdentifierTree.h" />
+		<Unit filename="src/IfTree.cpp" />
+		<Unit filename="src/IfTree.h" />
+		<Unit filename="src/LiteralTree.cpp" />
+		<Unit filename="src/LiteralTree.h" />
+		<Unit filename="src/NilTree.cpp" />
+		<Unit filename="src/NilTree.h" />
+		<Unit filename="src/NumberTree.cpp" />
+		<Unit filename="src/NumberTree.h" />
+		<Unit filename="src/ParamExprTree.cpp" />
+		<Unit filename="src/ParamExprTree.h" />
+		<Unit filename="src/Parser.cpp" />
+		<Unit filename="src/Parser.h" />
+		<Unit filename="src/PutsTree.cpp" />
+		<Unit filename="src/PutsTree.h" />
+		<Unit filename="src/ReturnTree.cpp" />
+		<Unit filename="src/ReturnTree.h" />
+		<Unit filename="src/StringTree.cpp" />
+		<Unit filename="src/StringTree.h" />
+		<Unit filename="src/TermTree.cpp" />
+		<Unit filename="src/TermTree.h" />
+		<Unit filename="src/WhileTree.cpp" />
+		<Unit filename="src/WhileTree.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/tokenizer/FlexLexer.h" />
+		<Unit filename="src/tokenizer/analyzer.hh" />
+		<Unit filename="src/tokenizer/lex.yy.cc" />
+		<Unit filename="src/tokenizer/token.cc" />
+		<Unit filename="src/tokenizer/token.hh" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

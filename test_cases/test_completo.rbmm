@@ -1,0 +1,89 @@
+############################################################################################
+#
+# PROGRAMMA PER VERIFICA INTERPRETE RMM - CONTROLLO PRIMALITA` DI UN NUMERO
+# 
+# Questo programmino è scritto in modo da coinvolgere tutti i costrutti del
+# linguaggio RMM, secondo la grammatica indicata nei requisiti.
+# Sintassi e semantica di questo codice sono corretti e in accordo con la grammatica.
+#
+############################################################################################
+
+def printWelcome(void) 
+	puts "--- NUMERI PRIMI ---";
+	puts "Stabilisce se un numero e' primo. Inserisci un numero positivo (max 6 cifre): ";
+	gets n;
+	return n;
+end
+
+
+
+def rootsquare(z) # Calcola il Number più vicino alla radice quadrata di un numero
+	# Approssima la radice in dodici passaggi
+	# Questo calcolo è corretto per numeri di max 6 cifre
+	n = 0;
+	xn = z/2;
+	while n < 12
+		xn = xn + (z/xn) / 2;
+		n = n+1;
+	end
+	puts "La radice quadrata di " + to_str(z) + " e` " + to_str(xn);
+	return xn;
+end
+
+
+def isPrime(n) 
+	res = false;
+	if (n==2)
+		res = true;
+	else 
+		if (n>2) and (n%2!=0) 
+		# sono necessarie le parentesi perché manca la priorità degli operatori
+			res = true;
+			div = 3;
+			stop = rootsquare(n);
+			puts "Controllo gli eventuali divisori da 3 fino a " + to_str(stop);
+			continueLoop = true;
+			while div <= stop and continueLoop
+				if n%div==0
+					puts to_str(div) + " e` divisore di " + to_str(n);
+					continueLoop = false;
+					res = false;
+				else
+					div = div + 2;
+				end
+			end
+		else
+			res = false;
+		end
+	end
+	return res;
+end
+
+def main()
+	n = printWelcome(nil);
+
+	loop = true;
+	while loop
+		while is_str(n)
+			puts "Attenzione: " + n + " non e` un numero valido";
+			puts "Inserisci un numero: ";
+			gets n;
+		end
+
+		if (n >= 1000000) or (n <= 0)
+			puts "Attenzione: " + to_str(n) + " non e` un numero positivo di max 6 cifre";
+			puts "Inserisci un numero: ";
+			gets n;
+		else
+			loop = false;
+			if isPrime(n)
+				puts "Il numero inserito e` primo";
+			else
+				puts "Il numero inserito non e` primo";
+			end
+		end
+	end
+	return 0;
+end
+
+

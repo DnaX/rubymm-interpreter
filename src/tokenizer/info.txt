@@ -1,0 +1,7 @@
+Questa e' una versione modificata dell'analizzatore sintattico.
+E' stata aggiunta la keyword PUTS.
+
+Il file lex.yy.cc e' stato rigenerato con il comando:
+flex --c++ lexer.l
+
+
