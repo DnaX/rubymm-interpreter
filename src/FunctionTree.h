@@ -30,9 +30,6 @@ class FunctionTree
         /// @return i comandi presenti nella funzione
         Command* getCommand();
 
-        /// @return l'ambiente di esecuzione corrente
-        Environment* getEnvironment();
-
         /// @return il numero dei parametri accettati
         int getParamsNum();
 
@@ -45,7 +42,6 @@ class FunctionTree
         string myName;
         vector<IdentifierTree*> param;
         Command* cmd;
-        Environment env;
 };
 
 #endif // FUNCTIONTREE_H

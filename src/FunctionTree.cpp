@@ -49,11 +49,6 @@ Command* FunctionTree::getCommand()
     return cmd;
 }
 
-Environment* FunctionTree::getEnvironment()
-{
-    return &env;
-}
-
 int FunctionTree::getParamsNum()
 {
     return param.size();

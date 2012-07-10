@@ -4,6 +4,7 @@
 #include <vector>
 #include "FunctionTree.h"
 #include "ParamExprTree.h"
+#include "Environment.h"
 
 ///
 /// @file   Execute.h
@@ -76,7 +77,7 @@ class Execute
         const std::vector<FunctionTree*>* functions;
 
         /// Esegue una funzione
-        LiteralTree* ExecuteFunction(FunctionTree* function, ParamExprTree* params, int level);
+        LiteralTree* ExecuteFunction(FunctionTree* function, Environment* env, ParamExprTree* params, int level);
         /// Esegue un comando
         LiteralTree* ExecuteCommand(Command* command, Environment* env, int level);
         /// Valuta una espressione

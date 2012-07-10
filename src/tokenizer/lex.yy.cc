@@ -1601,7 +1601,7 @@ int yyFlexLexer::yy_get_next_buffer()
 				case EOB_ACT_END_OF_FILE:
 					{
 					if ( yywrap(  ) )
-						return EOF;
+						return -1; // EOF
 
 					if ( ! (yy_did_buffer_switch_on_eof) )
 						YY_NEW_FILE;

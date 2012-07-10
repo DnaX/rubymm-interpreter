@@ -52,7 +52,11 @@ Execute::Execute(const std::vector<FunctionTree*>* func, bool debug) throw(Execu
         if( (*functions)[i]->getName().compare("main") == 0  )
         {
             mainFound = true;
-            literal = ExecuteFunction( (*functions)[i], NULL, 1);
+
+            Environment* main_env;
+            main_env = new Environment();
+
+            literal = ExecuteFunction( (*functions)[i], main_env, NULL, 1);
 
             // se il tipo ritornato è un numero ne memorizzo il valore
             if(literal->isNumberTree())
@@ -76,12 +80,8 @@ Execute::~Execute()
     //dtor
 }
 
-LiteralTree* Execute::ExecuteFunction(FunctionTree* function, ParamExprTree* params, int level)
+LiteralTree* Execute::ExecuteFunction(FunctionTree* function, Environment* env, ParamExprTree* params, int level)
 {
-    // function->getEnvironment()->clear();
-    if (!(function->getEnvironment()->isEmpty()))
-        throw ExecuteException("function recursion is not supported yet.");
-
 
     if(debugActive){
         for(int i=0;i<level;i++)
@@ -90,13 +90,13 @@ LiteralTree* Execute::ExecuteFunction(FunctionTree* function, ParamExprTree* par
     }
 
     // riempo l'ambiente di esecuzione con i paramentri attuali
-    fillEnvironment(function->getEnvironment(), function->getParams(), 0, params);
+    fillEnvironment(env, function->getParams(), 0, params);
 
     if(debugActive)
-        function->getEnvironment()->printEnvironment();
+        env->printEnvironment();
 
     // eseguo i comandi
-    LiteralTree* ret = ExecuteCommand(function->getCommand(), function->getEnvironment(), level + 1 );
+    LiteralTree* ret = ExecuteCommand(function->getCommand(), env, level + 1 );
 
     // se il ritorno del comando è nullo ritorno un valore NilTree
     if(ret == NULL) ret = new NilTree();
@@ -109,7 +109,7 @@ LiteralTree* Execute::ExecuteFunction(FunctionTree* function, ParamExprTree* par
     }
 
     // Il return svuota l'attuale ambiente di esecuzione
-    function->getEnvironment()->clear();
+    env->clear();
 
     delete params;
     params = NULL;
@@ -505,8 +505,12 @@ LiteralTree* Execute::EvaluateExpression(ExpressionTree* expr, Environment* env,
             {
                 if(debugActive)
                     cout << "\e[0;33mFunction Call: \e[0m" << (*functions)[i]->getName() << endl;;
+
+                Environment* new_env;
+                new_env = new Environment();
+
                 // eseguo la funzione dopo aver valutato i parametri
-                return ExecuteFunction( (*functions)[i], EvaluateFunctionParams(((FunctionCallTree*)expr)->getParams(), env, level), level+1);
+                return ExecuteFunction( (*functions)[i], new_env,  EvaluateFunctionParams(((FunctionCallTree*)expr)->getParams(), env, level), level+1);
             }
         }
         throw ExecuteException("unknown function", expr);
